@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Admin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 20px;
+        }
+
+        .navbar {
+            background-color: #232f3e;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            margin:0;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 18px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .product-container {
+            padding: 10px;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            height: 100%;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 240px;
+            border-radius: 5px;
+        }
+
+        .product-details {
+            margin-top: 10px;
+        }
+
+        .product-category,
+        .product-name,
+        .product-price,
+        .qty {
+        	justify-content:cnter;
+            margin-bottom: 5px;
+        }
+
+        .product-actions a {
+            color: white;
+            text-decoration: none;
+            background-color:#051232;
+            height:35px;
+            width:80px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:10px;
+            margin-right: 10px;
+            font-size: 16px;
+            margin-top:15px;
+            border-radius:4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>Welcome Admin</h1>
+    <div>
+        <a href="/adminhome/addnew">Add New</a>
+        <a href="/logout">Logout</a>
+    </div>
+</div>
+
+<div class="container content">
+    <h2>Products</h2>
+    <div class="row">
+        <div th:each="product : ${products}" class="col-md-3">
+            <div class="product-container">
+                <div class="product-card">
+                    <img th:src="${product.imgPath}" alt="Product Image" class="product-img">
+                    <div class="product-details">
+                        <div class="product-category" th:text="'Category: ' + ${product.category}">Category</div>
+                        <div class="product-name" th:text="'Name:' + ${product.productName}">Product Name</div>
+                        <div class="product-price" th:text="'Price:    ' + ${product.price} +'.Rs'">Price</div>
+                        <div class="qty" th:text="'Quantity: ' + ${product.availQty}">Available Quantity</div>
+                        <div class="product-actions">
+                            <a href="" th:href="@{/adminhome/edit/{id} (id=${product.id})}">Edit</a>
+                            <a href="" th:href="@{/adminhome/delete/{id} (id=${product.id})}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
